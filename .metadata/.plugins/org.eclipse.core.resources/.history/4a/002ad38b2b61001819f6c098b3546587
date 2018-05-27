@@ -1,0 +1,7 @@
+package com.zeus.DevC.Repositories;
+
+import org.springframework.data.repository.CrudRepository;
+
+public interface EducationRepository extends CrudRepository<T, ID> {
+
+}

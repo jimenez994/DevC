@@ -1,0 +1,7 @@
+package com.zeus.DevC.Repositories;
+
+import org.springframework.data.repository.CrudRepository;
+
+public interface ExperienceRepository extends CrudRepository<T, ID> {
+
+}

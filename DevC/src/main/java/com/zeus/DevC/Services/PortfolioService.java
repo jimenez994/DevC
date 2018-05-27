@@ -43,10 +43,8 @@ public class PortfolioService {
 			}
 			if(msg.isEmpty()) {
 				portfolio.setUser(user);
-//				_pR.save(portfolio);
 				user.setPortfolio(portfolio);
 				_uS.update(user);
-				System.out.println("hey i got here"+ user.getPortfolio().getHandle());
 				msg.put("success", "Created a porfolio");
 			}
 			return msg;
@@ -55,36 +53,14 @@ public class PortfolioService {
 		return msg;
 	}
 	public Portfolio userPorfolio(long id) {
-		Portfolio port =  _pR.findByUserId(id);
-		if(port != null) {
-			List<Experience> exps = port.getExperiences();
-			List<Education> educations = port.getEducations();
-			port.setUser(null);
-			for(Experience exp : exps) {
-				exp.setPortfolio(null);
-			}
-			port.setExperiences(exps);
-			for(Education edu : educations) {
-				edu.setPortfolio(null);
-			}
-			port.setEducations(educations);
-			return port;
-		}
-		return null;
+		return _pR.findByUserId(id);
 	}
 	
 	public Portfolio findByHandle(String handle) {
-		Portfolio portfolio = _pR.findByHandle(handle);
-//		portfolio.setEducations(null);
-		portfolio.setUser(null);
-//		portfolio.setExperiences(null);
-		return portfolio;
+		return _pR.findByHandle(handle);
 	}
 	public Portfolio findById(long id) {
 		Portfolio portfolio = _pR.findOne(id);;
-//		portfolio.setEducations(null);
-		portfolio.setUser(null);
-//		portfolio.setExperiences(null);
 		return portfolio;
 	}
 	public Map<String,String> update(Portfolio portfolio) {
@@ -108,12 +84,6 @@ public class PortfolioService {
 	}
 	
 	public ArrayList<Portfolio> all(){
-		ArrayList<Portfolio> ports = _pR.findAll();;
-		ArrayList<Portfolio> uPorts = new ArrayList<Portfolio>();
-		for (Portfolio port : ports) {
-			port.setUser(null);
-			uPorts.add(port);
-		}
-		return uPorts;
+		return _pR.findAll();
 	}
 }

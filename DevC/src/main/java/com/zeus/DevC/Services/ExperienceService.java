@@ -24,7 +24,7 @@ public class ExperienceService {
 			msg.put("company", "Company cannot be empty");
 		}
 		if(exp.getStartDate() == null) {
-			msg.put("startFrom", "Start from cannot be empty");
+			msg.put("startDate", "Start from cannot be empty");
 		}
 		if(msg.isEmpty()) {
 			_Er.save(exp);

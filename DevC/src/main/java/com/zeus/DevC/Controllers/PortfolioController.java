@@ -67,6 +67,7 @@ public class PortfolioController {
 	}
 	@GetMapping("/all")
 	public ArrayList<Portfolio> all(){
+		System.out.println(_pS.all() + "got it");
 		return _pS.all();
 	}
 	@DeleteMapping("/delete/{id}")

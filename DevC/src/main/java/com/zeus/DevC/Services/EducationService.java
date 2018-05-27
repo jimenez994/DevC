@@ -23,6 +23,9 @@ public class EducationService {
 		if(edu.getDegree() == "" || edu.getDegree() == null) {
 			msg.put("degree", "Degree cannot be empty");
 		}
+		if(edu.getStartDate() == null) {
+			msg.put("startDate", "Start from cannot be empty");
+		}
 		if(msg.isEmpty()) {
 			_eduR.save(edu);
 			msg.put("success", "You successfully created an education");

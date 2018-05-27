@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { GET_PROFILE, PROFILE_LOADING, GET_ERRORS, CLEAR_CURRENT_PROFILE, SET_CURRENT_USER } from './types';
+import { GET_PROFILE,GET_PROFILES, PROFILE_LOADING, GET_ERRORS, CLEAR_CURRENT_PROFILE, SET_CURRENT_USER } from './types';
 var IdKey = null;
 // Get current profile
 export const getCurrentProfile = () => dispatch => {
@@ -29,6 +29,30 @@ export const getCurrentProfile = () => dispatch => {
             })
             .catch(err => console.log(err))
     }
+}
+// Get profile by handle
+export const getProfileByHandle = (handle) => dispatch => {
+    dispatch(setProfileLoading());
+    axios.get(`http://localhost:8080/p/by/Handle/${handle}`)
+        .then( res => {
+            if(res.data != null){
+                dispatch({
+                type: GET_PROFILE,
+                payload: res.data
+                });
+            }else if(res.data == null){
+                dispatch({
+                    type: GET_PROFILE,
+                    payload: null
+                });
+            }else{
+                dispatch({
+                    type: GET_ERRORS,
+                    payload: null
+                }); 
+            }
+        })
+        .catch(err => console.log(err))
 }
 // Create Profile 
 export const createProfile = (profileData, history) => dispatch => {
@@ -109,6 +133,27 @@ export const deleteExperience = (id) => dispatch => {
             .catch(err => console.log(err));
     }
 }
+// Get all profiles
+export const getProfiles = () => dispatch => {
+    dispatch(setProfileLoading());
+    axios
+        .get("http://localhost:8080/p/all")
+        .then(res => {
+            if(res.data != null){
+                dispatch({
+                    type: GET_PROFILES,
+                    payload: res.data
+                })
+            }else{
+                dispatch({
+                    type: GET_PROFILES,
+                    payload: null
+                })
+            }
+        })
+        .catch(err => console.log(err));
+}
+
 // delete an Education
 export const deleteEducation= (id) => dispatch => {
     if(localStorage.IdKey){

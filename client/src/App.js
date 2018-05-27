@@ -22,6 +22,9 @@ import CreateProfile from "./conponents/create-profile/CreateProfile";
 import EditProfile from "./conponents/edit-profile/EditProfile";
 import AddExperience from "./conponents/add-credentials/AddExperience";
 import AddEducation from "./conponents/add-credentials/AddEducation";
+import Profiles from "./conponents/profiles/Profiles";
+import Profile from "./conponents/profile/Profile";
+
 
 // This to check if user is in session
 // Chaeck for tokem
@@ -52,6 +55,8 @@ class App extends Component {
             <div className="container">
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
+              <Route exact path="/profiles" component={Profiles} />
+              <Route exact path="/profile/:handle" component={Profile} />
               <Switch>
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
               </Switch>

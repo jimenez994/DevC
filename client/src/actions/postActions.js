@@ -10,7 +10,6 @@ var IdKey = null;
 // Add post
 export const addPost = postData => dispatch => {
   if (localStorage.IdKey) {
-    IdKey = localStorage.IdKey;
     axios
       .post(`http://localhost:8080/post/new`, postData)
       .then(res => {
@@ -34,7 +33,6 @@ export const addPost = postData => dispatch => {
 export const getPosts = () => dispatch => {
   dispatch(setPostLoading);
   if (localStorage.IdKey) {
-    IdKey = localStorage.IdKey;
     axios
       .post(`http://localhost:8080/post/all`)
       .then(res => {

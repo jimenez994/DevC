@@ -34,7 +34,6 @@ if(localStorage.IdKey){
   // Get user info
   // Set user and isAithenticated
   store.dispatch(setCurrentUser(localStorage.IdKey))
-
   // // Theck fro expired token
   // const currentTime = Date.now()/ 1000;
   // if(decoded.exp< currentTime){

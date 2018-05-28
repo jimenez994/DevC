@@ -7,8 +7,8 @@ export const getCurrentProfile = () => dispatch => {
     dispatch(setProfileLoading());
     if(localStorage.IdKey){
         // key is the user id
-        IdKey = localStorage.IdKey;
-        axios.get(`http://localhost:8080/p/portfolio/${IdKey}`)
+        IdKey = JSON.parse(localStorage.IdKey);
+        axios.get(`http://localhost:8080/p/portfolio/${IdKey.user_id}`)
             .then( res => {
                 if(res.data != null){
                     dispatch({
@@ -57,9 +57,9 @@ export const getProfileByHandle = (handle) => dispatch => {
 // Create Profile 
 export const createProfile = (profileData, history) => dispatch => {
     if(localStorage.IdKey){
-        IdKey = localStorage.IdKey;
+        IdKey = JSON.parse(localStorage.IdKey);
         axios
-            .post(`http://localhost:8080/p/new/${IdKey}`, profileData)
+            .post(`http://localhost:8080/p/new/${IdKey.user_id}`, profileData)
             .then(res => {
                 if(res.data.success){
                     history.push("/dashboard");
@@ -76,9 +76,9 @@ export const createProfile = (profileData, history) => dispatch => {
 // add experience
 export const addExperience = (expData, history) => dispatch => {
     if(localStorage.IdKey){
-        IdKey = localStorage.IdKey;
+        IdKey = JSON.parse(localStorage.IdKey);
         axios
-            .post(`http://localhost:8080/exp/new/${IdKey}`, expData)
+            .post(`http://localhost:8080/exp/new/${IdKey.user_id}`, expData)
             .then(res => {
                 if(res.data.success){
                     history.push("/dashboard");
@@ -95,9 +95,9 @@ export const addExperience = (expData, history) => dispatch => {
 // add education
 export const addEducation = (eduData, history) => dispatch => {
     if(localStorage.IdKey){
-        IdKey = localStorage.IdKey;
+        IdKey = JSON.parse(localStorage.IdKey);
         axios
-            .post(`http://localhost:8080/edu/new/${IdKey}`, eduData)
+            .post(`http://localhost:8080/edu/new/${IdKey.user_id}`, eduData)
             .then(res => {
                 if(res.data.success){
                     history.push("/dashboard");
@@ -114,7 +114,6 @@ export const addEducation = (eduData, history) => dispatch => {
 // delete an experience 
 export const deleteExperience = (id) => dispatch => {
     if(localStorage.IdKey){
-        IdKey = localStorage.IdKey;
         axios
             .delete(`http://localhost:8080/exp/delete/${id}`)
             .then(res => {
@@ -157,7 +156,6 @@ export const getProfiles = () => dispatch => {
 // delete an Education
 export const deleteEducation= (id) => dispatch => {
     if(localStorage.IdKey){
-        IdKey = localStorage.IdKey;
         axios
             .delete(`http://localhost:8080/edu/delete/${id}`)
             .then(res => {
@@ -180,8 +178,9 @@ export const deleteEducation= (id) => dispatch => {
 export const deleteAccount = () => dispatch => {
     if(window.confirm('Are you sure? This can NOT be undone!')){
         if(localStorage.IdKey){
+            IdKey = JSON.parse(localStorage.IdKey);
             axios
-                .delete(`http://localhost:8080/p/delete/${IdKey}`)
+                .delete(`http://localhost:8080/p/delete/${IdKey.user_id}`)
                 .then(res => {
                     if(res.data.success){
                         dispatch({

@@ -8,6 +8,9 @@ const initialState = {
 export default function(state = initialState, action){
     switch (action.type) {
         case SET_CURRENT_USER:
+        if(typeof action.payload === 'string'){
+            action.payload = JSON.parse(action.payload);
+        }
         return {
             ...state,
             isAuthenticated: !isEmpty(action.payload),

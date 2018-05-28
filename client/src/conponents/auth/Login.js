@@ -27,7 +27,6 @@ class Login extends Component {
     if (nextProps.auth.isAuthenticated) {
       this.props.history.push("/dashboard");
     }
-    console.log(nextProps);
     this.setState({ errors: nextProps.errors });
   }
   onChange(e) {

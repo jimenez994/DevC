@@ -24,8 +24,8 @@ import AddExperience from "./conponents/add-credentials/AddExperience";
 import AddEducation from "./conponents/add-credentials/AddEducation";
 import Profiles from "./conponents/profiles/Profiles";
 import Profile from "./conponents/profile/Profile";
-
-
+import NotFound from "./conponents/not-found/NotFound";
+import Posts from "./conponents/posts/Posts";
 // This to check if user is in session
 // Chaeck for tokem
 if(localStorage.IdKey){
@@ -72,6 +72,10 @@ class App extends Component {
               <Switch>
                 <PrivateRoute exact path="/add-education" component={AddEducation} />
               </Switch>
+              <Switch>
+                <PrivateRoute exact path="/feed" component={Posts} />
+              </Switch>
+              <Route exact path="/not-found" component={NotFound} />
             </div>
             <Footer />
           </div>

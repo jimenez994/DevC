@@ -26,12 +26,17 @@ public class Post {
 	@Column(length=5000)
 	private String text;
 	
+	private String name;
+	
+	private String avatar;
+	
+	private long user;
+	
 	@DateTimeFormat(pattern="MM:dd:yyyy HH:mm:ss")
 	private Date createdAt;
 	
 	@DateTimeFormat(pattern="MM:dd:yyyy HH:mm:ss")
 	private Date updatedAt;
-	private Date endDate;
 	
 	public Post() {}
 	
@@ -52,12 +57,36 @@ public class Post {
 		return text;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
 	public void setText(String text) {
 		this.text = text;
 	}
 
 	public Date getCreatedAt() {
 		return createdAt;
+	}
+
+	public long getUser() {
+		return user;
+	}
+
+	public void setUser(long user) {
+		this.user = user;
 	}
 
 	public void setCreatedAt(Date createdAt) {
@@ -71,15 +100,4 @@ public class Post {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-
-	public Date getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
-	
-	
-
 }

@@ -1,5 +1,8 @@
 package com.zeus.DevC.Controllers;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,9 +22,13 @@ public class PostController {
 	private PostService _pS;
 	
 	@PostMapping("/new")
-	public String createPost(@RequestBody Post post) {
-		_pS.create(post);
-		return "success";
+	public Map<String,Object> createPost(@RequestBody Post post) {
+		return _pS.create(post);
+	}
+	
+	@RequestMapping("/all")
+	public ArrayList<Post> allPosts(){
+		return _pS.findAll();
 	}
 
 }

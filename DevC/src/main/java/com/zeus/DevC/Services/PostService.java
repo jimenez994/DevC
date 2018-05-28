@@ -32,5 +32,11 @@ public class PostService {
 	public ArrayList<Post> findAll(){
 		return _pR.findAll();
 	}
+	public Map<String, String> delete(long id){
+		Map<String, String> msg = new HashMap<String, String>();
+		_pR.delete(id);
+		msg.put("success", "successfully deleted a post");
+		return msg;
+	}
 
 }

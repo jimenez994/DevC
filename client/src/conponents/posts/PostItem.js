@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
-// import { deletePost,  } from "../../actions/postActions";
+import { deletePost,  } from "../../actions/postActions";
 
 class PostItem extends Component {
   onDeleteClick(id) {
-    // this.props.deletePost(id);
+    this.props.deletePost(id);
   }
 
 //   onLikeClick(id) {
@@ -103,6 +103,6 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { })(
+export default connect(mapStateToProps, { deletePost })(
   PostItem
 );

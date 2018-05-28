@@ -3,9 +3,9 @@ import {
     ADD_POST,
     GET_ERRORS,
     GET_POSTS,
-    POST_LOADING
+    POST_LOADING,
+    DELETE_POST
 } from './types';
-var IdKey = null;
 
 // Add post
 export const addPost = postData => dispatch => {
@@ -45,6 +45,29 @@ export const getPosts = () => dispatch => {
           dispatch({
             type: GET_POSTS,
             payload: null
+          });
+        }
+      })
+      .catch(err => console.log(err));
+  }
+};
+
+//delete post
+export const deletePost = id => dispatch => {
+  dispatch(setPostLoading);
+  if (localStorage.IdKey) {
+    axios
+      .delete(`http://localhost:8080/post/delete/${id}`)
+      .then(res => {
+        if (res.data != null) {
+          dispatch({
+              type: DELETE_POST,
+              payload: id
+          })
+        } else {
+          dispatch({
+            type: GET_ERRORS,
+            payload: res.data
           });
         }
       })

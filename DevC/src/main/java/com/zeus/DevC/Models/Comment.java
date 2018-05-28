@@ -1,31 +1,26 @@
 package com.zeus.DevC.Models;
 
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
+import javax.persistence.ManyToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Post {
+public class Comment {
 	@Id
 	@GeneratedValue
 	private long id;
@@ -45,23 +40,12 @@ public class Post {
 	@DateTimeFormat(pattern="MM:dd:yyyy HH:mm:ss")
 	private Date updatedAt;
 	
-	@OneToMany(mappedBy="post",cascade=CascadeType.ALL)
-	private List<Comment> comments;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="post_id")
+    @JsonIgnore
+	private Post post;
 	
-	@ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "likes", 
-        joinColumns = @JoinColumn(name = "post_id"), 
-        inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private List<User> likes;
-	
-	public Post() {}
-	
-	@PrePersist
-	public void onCreate(){this.createdAt = new Date();}
-	@PreUpdate
-	public void onUpdate(){this.updatedAt = new Date();}
+	public Comment() {}
 
 	public long getId() {
 		return id;
@@ -73,6 +57,10 @@ public class Post {
 
 	public String getText() {
 		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
 	}
 
 	public String getName() {
@@ -91,14 +79,6 @@ public class Post {
 		this.avatar = avatar;
 	}
 
-	public void setText(String text) {
-		this.text = text;
-	}
-
-	public Date getCreatedAt() {
-		return createdAt;
-	}
-
 	public long getUser() {
 		return user;
 	}
@@ -107,24 +87,12 @@ public class Post {
 		this.user = user;
 	}
 
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
-	}
-
-	public List<User> getLikes() {
-		return likes;
-	}
-
-	public void setLikes(List<User> likes) {
-		this.likes = likes;
-	}
-
-	public List<Comment> getComments() {
-		return comments;
-	}
-	
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
 	}
 
 	public Date getUpdatedAt() {
@@ -134,4 +102,15 @@ public class Post {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+
+	public Post getPost() {
+		return post;
+	}
+
+	public void setPost(Post post) {
+		this.post = post;
+	}
+	
+
+	
 }

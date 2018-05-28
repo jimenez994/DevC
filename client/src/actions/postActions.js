@@ -141,13 +141,29 @@ export const removeLike = id => dispatch => {
 export const addComment = (postId, commentData) => dispatch => {
   if (localStorage.IdKey) {
     axios
-      .post(`http://localhost:8080/post/new/comment/${postId}`, commentData)
+      .post(`http://localhost:8080/post/comment/new/${postId}`, commentData)
       .then(res => {
         if (res.data.success) {
+          dispatch(getPost(postId))
+        } else {
           dispatch({
-              type: GET_POST,
-              payload: res.data
-          })
+            type: GET_ERRORS,
+            payload: res.data
+          });
+        }
+      })
+      .catch(err => console.log(err));
+  }
+};
+
+// delete comment
+export const deleteComment = (postId,commentId) => dispatch => {
+  if (localStorage.IdKey) {
+    axios
+      .delete(`http://localhost:8080/post/comment/delete/${commentId}`)
+      .then(res => {
+        if (res.data.success) {
+          dispatch(getPost(postId))
         } else {
           dispatch({
             type: GET_ERRORS,

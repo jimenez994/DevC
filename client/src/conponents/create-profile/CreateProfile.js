@@ -35,6 +35,7 @@ class CreateProfile extends Component {
         this.setState({errors: nextProps.errors})
       }
     }
+
     onSubmit(e){
       e.preventDefault();
       const profileData = {

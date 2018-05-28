@@ -32,7 +32,8 @@ class CommentForm extends Component {
       text: this.state.text,
       name: user.name,
       avatar: user.avatar,
-      user: user.user_id
+      user: user.user_id,
+      post: postId
     };
 
     this.props.addComment(postId, newComment);
@@ -49,7 +50,9 @@ class CommentForm extends Component {
     return (
       <div className="post-form mb-3">
         <div className="card card-info">
-          <div className="card-header bg-info text-white">Make a comment...</div>
+          <div className="card-header bg-info text-white">
+            Make a comment...
+          </div>
           <div className="card-body">
             <form onSubmit={this.onSubmit}>
               <div className="form-group">

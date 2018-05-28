@@ -17,7 +17,6 @@ class Profile extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps.profile)
     if(nextProps.profile.profile === ""){
       nextProps.profile.profile = null
     }

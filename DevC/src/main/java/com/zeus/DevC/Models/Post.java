@@ -1,17 +1,23 @@
 package com.zeus.DevC.Models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -37,6 +43,14 @@ public class Post {
 	
 	@DateTimeFormat(pattern="MM:dd:yyyy HH:mm:ss")
 	private Date updatedAt;
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "likes", 
+        joinColumns = @JoinColumn(name = "post_id"), 
+        inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> likes;
 	
 	public Post() {}
 	
@@ -91,6 +105,14 @@ public class Post {
 
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
+	}
+
+	public List<User> getLikes() {
+		return likes;
+	}
+
+	public void setLikes(List<User> likes) {
+		this.likes = likes;
 	}
 
 	public Date getUpdatedAt() {

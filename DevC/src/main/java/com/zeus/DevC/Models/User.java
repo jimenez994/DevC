@@ -1,12 +1,16 @@
 package com.zeus.DevC.Models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -14,6 +18,7 @@ import javax.persistence.PreUpdate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -36,6 +41,15 @@ public class User {
 	
 	@OneToOne(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private Portfolio portfolio;
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "likes", 
+        joinColumns = @JoinColumn(name = "user_id"), 
+        inverseJoinColumns = @JoinColumn(name = "post_id")
+    )
+    @JsonIgnore
+    private List<Post> likedPosts;
 	
 	@DateTimeFormat(pattern="MM:dd:yyyy HH:mm:ss")
 	private Date createdAt;
@@ -113,5 +127,14 @@ public class User {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+
+	public List<Post> getLikedPosts() {
+		return likedPosts;
+	}
+
+	public void setLikedPosts(List<Post> likedPosts) {
+		this.likedPosts = likedPosts;
+	}
+	
 	
 }

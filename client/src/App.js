@@ -26,6 +26,7 @@ import Profiles from "./conponents/profiles/Profiles";
 import Profile from "./conponents/profile/Profile";
 import NotFound from "./conponents/not-found/NotFound";
 import Posts from "./conponents/posts/Posts";
+import Post from "./conponents/post/Post";
 // This to check if user is in session
 // Chaeck for tokem
 if(localStorage.IdKey){
@@ -73,6 +74,9 @@ class App extends Component {
               </Switch>
               <Switch>
                 <PrivateRoute exact path="/feed" component={Posts} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/post/:id" component={Post} />
               </Switch>
               <Route exact path="/not-found" component={NotFound} />
             </div>

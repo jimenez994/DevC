@@ -28,8 +28,14 @@ public class PostController {
 		return _pS.create(post);
 	}
 	
+	@RequestMapping("/get/{id}")
+	public Post getPost(@PathVariable("id") long id) {
+		return _pS.findOne(id);
+	}
+	
 	@RequestMapping("/all")
 	public ArrayList<Post> allPosts(){
+		System.out.println(_pS.findAll());
 		return _pS.findAll();
 	}
 	
@@ -37,5 +43,16 @@ public class PostController {
 	public Map<String,String> deletePost(@PathVariable("id") long id){
 		return _pS.delete(id);
 	}
+	
+	@PostMapping("/like/{postId}/{userId}")
+	public ArrayList<Post> likePost(@PathVariable("postId") long pId, @PathVariable("userId") long uId){
+		return _pS.likePost(pId, uId);
+	}
+	
+	@PostMapping("/unlike/{postId}/{userId}")
+	public Map<String,String> unlikePost(@PathVariable("postId") long pId, @PathVariable("userId") long uId){
+		return _pS.unlikePost(pId, uId);
+	}
+	
 
 }

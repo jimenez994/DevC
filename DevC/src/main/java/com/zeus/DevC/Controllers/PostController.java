@@ -1,6 +1,6 @@
 package com.zeus.DevC.Controllers;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +34,7 @@ public class PostController {
 	}
 	
 	@RequestMapping("/all")
-	public ArrayList<Post> allPosts(){
-		System.out.println(_pS.findAll());
+	public List<Post> allPosts(){
 		return _pS.findAll();
 	}
 	
@@ -45,7 +44,7 @@ public class PostController {
 	}
 	
 	@PostMapping("/like/{postId}/{userId}")
-	public ArrayList<Post> likePost(@PathVariable("postId") long pId, @PathVariable("userId") long uId){
+	public List<Post> likePost(@PathVariable("postId") long pId, @PathVariable("userId") long uId){
 		return _pS.likePost(pId, uId);
 	}
 	

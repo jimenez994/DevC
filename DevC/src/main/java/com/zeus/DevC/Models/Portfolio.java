@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -51,6 +52,7 @@ public class Portfolio {
 	
 	private String instagram;
 	
+	@Column(length=5000)
 	private String bio;
 	
 	private String githubusername;

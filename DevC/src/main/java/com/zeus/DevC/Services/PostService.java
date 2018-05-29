@@ -36,7 +36,7 @@ public class PostService {
 		}
 		return map;
 	}
-	public ArrayList<Post> findAll(){
+	public List<Post> findAll(){
 		return _pR.findAll();
 	}
 	
@@ -47,7 +47,7 @@ public class PostService {
 		return msg;
 	}
 	
-	public ArrayList<Post> likePost(long postId, long userId){
+	public List<Post> likePost(long postId, long userId){
 		Post post = _pR.findOne(postId);
 		User user = _uR.findOne(userId);
 		if(!post.getLikes().contains(user)) {

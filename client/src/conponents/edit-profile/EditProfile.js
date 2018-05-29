@@ -45,7 +45,6 @@ class CreateProfile extends Component {
 
     if (nextProps.profile.profile) {
       const profile = nextProps.profile.profile;
-        console.log(profile.id + "this is the id profile")
       // Bring skills array back to CSV
     //   const skillsCSV = profile.skills.join(",");
         profile.id = profile.id;

@@ -53,10 +53,12 @@ public class UserService {
 			if(msg.isEmpty()) {
 				user.setPassword(bcrypt.encode( user.getPassword()));
 				userRepo.save(user);
+				user.setAvatar("https://picsum.photos/200/200?image="+user.getId());
+				userRepo.save(user);
 				msg.put("user_id", user.getId()+"");
 				msg.put("name", user.getName());
 				msg.put("email", user.getEmail());
-				msg.put("avatar", "something");
+				msg.put("avatar", user.getAvatar());
 				msg.put("success", "You successfully created a User");
 			}
 			return msg;
@@ -85,7 +87,7 @@ public class UserService {
 				msg.put("user_id", eUser.getId()+"");
 				msg.put("name", eUser.getName());
 				msg.put("email", eUser.getEmail());
-				msg.put("avatar", "something");				
+				msg.put("avatar", eUser.getAvatar());				
 				return msg;
 			}else {
 				msg.put("password", "Invalid password");

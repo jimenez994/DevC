@@ -5,11 +5,13 @@ import {
     GET_POSTS,
     POST_LOADING,
     DELETE_POST,
-    GET_POST
+    GET_POST,
+    CLEAR_ERRORS
 
 } from './types';
 // Add post
 export const addPost = postData => dispatch => {
+  dispatch(clearErrors());  
   if (localStorage.IdKey) {
     axios
       .post(`http://localhost:8080/post/new`, postData)
@@ -139,6 +141,7 @@ export const removeLike = id => dispatch => {
 
 // Add comment
 export const addComment = (postId, commentData) => dispatch => {
+  dispatch(clearErrors());
   if (localStorage.IdKey) {
     axios
       .post(`http://localhost:8080/post/comment/new/${postId}`, commentData)
@@ -180,4 +183,11 @@ export const setPostLoading = () => {
     return {
         type: POST_LOADING
     }
+}
+
+// clear errors
+export const clearErrors = () => {
+  return {
+    type: CLEAR_ERRORS
+  }
 }

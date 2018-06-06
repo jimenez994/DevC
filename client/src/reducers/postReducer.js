@@ -19,8 +19,6 @@ export default function(state = initialSate, action) {
                 loading: false
             };
         case ADD_POST:
-            console.log(action.payload)
-            console.log(state.posts)
             return {
                 ...state,
                 posts: [action.payload, ...state.posts]

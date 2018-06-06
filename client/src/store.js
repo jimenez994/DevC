@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware,compose } from "redux";
 import thunk from 'redux-thunk';
 
-// this is going to index reducer even tho is escified to there
+// this is going to index reducer even tho is nit especified to there
 import rootReducer from './reducers';
 
 // prelodedSate

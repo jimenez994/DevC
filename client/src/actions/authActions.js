@@ -7,11 +7,15 @@ export const  registerUser = (userData, history) => dispatch => {
         .post("http://localhost:8080/user/register", userData)
         .then(res => {
             if(res.data.success){
-                // const token = res.data;
-                // localStorage.setItem('IdKey', token);
-                // setAuthToken(token)
-                // dispatch(setCurrentUser(token))
-                history.push('/login')
+                // save to localstore
+                const token = res.data;
+                // set id to localStorage
+                localStorage.setItem('IdKey', JSON.stringify(token));
+                // Set token to auth header
+                setAuthToken(token);
+                // Set current user
+                dispatch(setCurrentUser(token))
+                history.push('/dashboard')
             }else{
                 dispatch({
                 type: GET_ERRORS,
@@ -26,7 +30,7 @@ export const  registerUser = (userData, history) => dispatch => {
 export const loginUser = userData => dispatch => {
     axios.post("http://localhost:8080/user/login", userData)
         .then(res => {
-            if(res.data.success){                
+            if(res.data.success){              
             // save to localstore
                 const  token  = res.data;
             // set id to localStorage

@@ -17,7 +17,6 @@ export const addPost = postData => dispatch => {
       .post(`http://localhost:8080/post/new`, postData)
       .then(res => {
         if (res.data.success) {
-            // changin from null to []
             res.data.likes = []
           dispatch({
               type: ADD_POST,

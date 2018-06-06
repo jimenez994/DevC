@@ -4,7 +4,7 @@ import { GET_ERRORS, SET_CURRENT_USER } from "./types";
 //  REGISTER  User
 export const  registerUser = (userData, history) => dispatch => {
     axios
-        .post("http://localhost:8080/user/register", userData)
+        .post("http://107.21.178.139/user/register", userData)
         .then(res => {
             if(res.data.success){
                 // save to localstore
@@ -28,7 +28,7 @@ export const  registerUser = (userData, history) => dispatch => {
 // this is justa message
 // Login - get user Id
 export const loginUser = userData => dispatch => {
-    axios.post("http://localhost:8080/user/login", userData)
+    axios.post("http://107.21.178.139/user/login", userData)
         .then(res => {
             if(res.data.success){              
             // save to localstore
@@ -55,7 +55,7 @@ export const setCurrentUser = (decoded)=> {
         type: SET_CURRENT_USER,
         payload: decoded
     }
-    // axios.get(`http://localhost:8080/user/find/${decoded}`)
+    // axios.get(`http://107.21.178.139/user/find/${decoded}`)
     //     .then(res => {
     //         dispatch({
     //             type: SET_CURRENT_USER,

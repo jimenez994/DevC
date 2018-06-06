@@ -8,7 +8,7 @@ export const getCurrentProfile = () => dispatch => {
     if(localStorage.IdKey){
         // key is the user id
         IdKey = JSON.parse(localStorage.IdKey);
-        axios.get(`http://localhost:8080/p/portfolio/${IdKey.user_id}`)
+        axios.get(`http://107.21.178.139/p/portfolio/${IdKey.user_id}`)
             .then( res => {
                 if(res.data != null){
                     dispatch({
@@ -33,7 +33,7 @@ export const getCurrentProfile = () => dispatch => {
 // Get profile by handle
 export const getProfileByHandle = (handle) => dispatch => {
     dispatch(setProfileLoading());
-    axios.get(`http://localhost:8080/p/by/Handle/${handle}`)
+    axios.get(`http://107.21.178.139/p/by/Handle/${handle}`)
         .then( res => {
             if(res.data != null){
                 dispatch({
@@ -59,7 +59,7 @@ export const createProfile = (profileData, history) => dispatch => {
     if(localStorage.IdKey){
         IdKey = JSON.parse(localStorage.IdKey);
         axios
-            .post(`http://localhost:8080/p/new/${IdKey.user_id}`, profileData)
+            .post(`http://107.21.178.139/p/new/${IdKey.user_id}`, profileData)
             .then(res => {
                 if(res.data.success){
                     history.push("/dashboard");
@@ -78,7 +78,7 @@ export const addExperience = (expData, history) => dispatch => {
     if(localStorage.IdKey){
         IdKey = JSON.parse(localStorage.IdKey);
         axios
-            .post(`http://localhost:8080/exp/new/${IdKey.user_id}`, expData)
+            .post(`http://107.21.178.139/exp/new/${IdKey.user_id}`, expData)
             .then(res => {
                 if(res.data.success){
                     history.push("/dashboard");
@@ -97,7 +97,7 @@ export const addEducation = (eduData, history) => dispatch => {
     if(localStorage.IdKey){
         IdKey = JSON.parse(localStorage.IdKey);
         axios
-            .post(`http://localhost:8080/edu/new/${IdKey.user_id}`, eduData)
+            .post(`http://107.21.178.139/edu/new/${IdKey.user_id}`, eduData)
             .then(res => {
                 if(res.data.success){
                     history.push("/dashboard");
@@ -115,7 +115,7 @@ export const addEducation = (eduData, history) => dispatch => {
 export const deleteExperience = (id) => dispatch => {
     if(localStorage.IdKey){
         axios
-            .delete(`http://localhost:8080/exp/delete/${id}`)
+            .delete(`http://107.21.178.139/exp/delete/${id}`)
             .then(res => {
                 if(res.data != null){
                     dispatch({
@@ -136,7 +136,7 @@ export const deleteExperience = (id) => dispatch => {
 export const getProfiles = () => dispatch => {
     dispatch(setProfileLoading());
     axios
-        .get("http://localhost:8080/p/all")
+        .get("http://107.21.178.139/p/all")
         .then(res => {
             if(res.data != null){
                 dispatch({
@@ -157,7 +157,7 @@ export const getProfiles = () => dispatch => {
 export const deleteEducation= (id) => dispatch => {
     if(localStorage.IdKey){
         axios
-            .delete(`http://localhost:8080/edu/delete/${id}`)
+            .delete(`http://107.21.178.139/edu/delete/${id}`)
             .then(res => {
                 if(res.data != null){
                     dispatch({
@@ -180,7 +180,7 @@ export const deleteAccount = () => dispatch => {
         if(localStorage.IdKey){
             IdKey = JSON.parse(localStorage.IdKey);
             axios
-                .delete(`http://localhost:8080/p/delete/${IdKey.user_id}`)
+                .delete(`http://107.21.178.139/p/delete/${IdKey.user_id}`)
                 .then(res => {
                     if(res.data.success){
                         dispatch({

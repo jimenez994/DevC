@@ -14,7 +14,7 @@ export const addPost = postData => dispatch => {
   dispatch(clearErrors());  
   if (localStorage.IdKey) {
     axios
-      .post(`http://localhost:8080/post/new`, postData)
+      .post(`http://107.21.178.139/post/new`, postData)
       .then(res => {
         if (res.data.success) {
             res.data.likes = []
@@ -38,7 +38,7 @@ export const getPosts = () => dispatch => {
   dispatch(setPostLoading);
   if (localStorage.IdKey) {
     axios
-      .post(`http://localhost:8080/post/all`)
+      .post(`http://107.21.178.139/post/all`)
       .then(res => {
         if (res.data != null) {
           dispatch({
@@ -60,7 +60,7 @@ export const getPost = (id) => dispatch => {
   dispatch(setPostLoading);
   if (localStorage.IdKey) {
     axios
-      .post(`http://localhost:8080/post/get/${id}`)
+      .post(`http://107.21.178.139/post/get/${id}`)
       .then(res => {
         if (res.data != null) {
           dispatch({
@@ -83,7 +83,7 @@ export const deletePost = id => dispatch => {
   dispatch(setPostLoading);
   if (localStorage.IdKey) {
     axios
-      .delete(`http://localhost:8080/post/delete/${id}`)
+      .delete(`http://107.21.178.139/post/delete/${id}`)
       .then(res => {
         if (res.data != null) {
           dispatch({
@@ -106,7 +106,7 @@ export const addLike = id => dispatch => {
   if (localStorage.IdKey) {
       let Idkey = JSON.parse(localStorage.IdKey);
     axios
-      .post(`http://localhost:8080/post/like/${id}/${Idkey.user_id}`)
+      .post(`http://107.21.178.139/post/like/${id}/${Idkey.user_id}`)
       .then(res => {
         if (res.data != null) {
           dispatch(getPosts())
@@ -126,7 +126,7 @@ export const removeLike = id => dispatch => {
   if (localStorage.IdKey) {
       let Idkey = JSON.parse(localStorage.IdKey);
     axios
-      .post(`http://localhost:8080/post/unlike/${id}/${Idkey.user_id}`)
+      .post(`http://107.21.178.139/post/unlike/${id}/${Idkey.user_id}`)
       .then(res => {
         if (res.data != null) {
           dispatch(getPosts());
@@ -143,7 +143,7 @@ export const addComment = (postId, commentData) => dispatch => {
   dispatch(clearErrors());
   if (localStorage.IdKey) {
     axios
-      .post(`http://localhost:8080/post/comment/new/${postId}`, commentData)
+      .post(`http://107.21.178.139/post/comment/new/${postId}`, commentData)
       .then(res => {
         if (res.data.success) {
           dispatch(getPost(postId))
@@ -162,7 +162,7 @@ export const addComment = (postId, commentData) => dispatch => {
 export const deleteComment = (postId,commentId) => dispatch => {
   if (localStorage.IdKey) {
     axios
-      .delete(`http://localhost:8080/post/comment/delete/${commentId}`)
+      .delete(`http://107.21.178.139/post/comment/delete/${commentId}`)
       .then(res => {
         if (res.data.success) {
           dispatch(getPost(postId))

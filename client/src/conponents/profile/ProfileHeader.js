@@ -37,6 +37,7 @@ class ProfileHeader extends Component {
                   >
                     <i className="fas fa-globe fa-2x" />
                   </a>
+                  
                 )}
 
                 {isEmpty(profile && profile.twitter) ? null : (

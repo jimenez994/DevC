@@ -94,7 +94,7 @@ class ProfileHeader extends Component {
           </div>
     
       )}
- 
+
     return (
       <div className="row">
         <div className="col-md-12">
